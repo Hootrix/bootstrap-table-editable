@@ -121,7 +121,7 @@
                 //     {value:"3",text:"行政部"}
                 //     ]
             };
-            var c = window[column.editablePangCustomEditableOptionFunction];
+            var c = window[column.editablePangCustomEditableOptionFunction](that,that.getData());
             var editableOption = !!c?$.extend(editableOptionDefault,c):column.editable;
             that.$body.find('a[data-name="' + column.field + '"]').editable(editableOption)//修改.editable(column.editable)
                 .off('save').on('save', function(e, params) {
