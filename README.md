@@ -2,13 +2,12 @@
 Bootstrap-table-editable modified version of the extension
 Support for custom configuration X-editable
 
-Bootstrap-table-editable扩展的修改版本：支持自定义配置X-editable
+Bootstrap-table-editable扩展的修改版本：支持自定义配置`X-editable`
 
-修改自：https://github.com/wenzhixin/bootstrap-table-examples/blob/master/extensions/editable.html
+修改自：https://github.com/wenzhixin/bootstrap-table-examples/blob/master/extensions/editable.html  
 ##用法
 ```
 <table
-        data-pang-custom-search-placeholder-value="商品,地址,总价 "
         data-client-sort="false"
         data-pagination="true"
         data-sort-name="id"
