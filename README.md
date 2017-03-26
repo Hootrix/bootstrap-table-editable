@@ -30,7 +30,7 @@ data-editable-pang-custom-editable-option-function="editableOption" 设置对应
 
 <script type="application/javascript">
     //编辑框的配置
-    var editableOption = function(){
+    var editableOption = function($this,data){
         return {
             emptytext: '0.0',
             type: 'select',
