@@ -5,7 +5,8 @@ Support for custom configuration X-editable
 Bootstrap-table-editable扩展的修改版本：支持自定义配置 `X-editable` 
 
 修改自：https://github.com/wenzhixin/bootstrap-table-examples/blob/master/extensions/editable.html  
-## 用法
+## examples
+data-editable-pang-custom-editable-option-function="editableOption" 设置对应的X-editable配置参数
 ```
 <table
         data-client-sort="false"
