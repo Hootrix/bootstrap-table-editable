@@ -70,6 +70,7 @@
             };
             column._formatter = column._formatter ? column._formatter : column.formatter;
             column.formatter = function(value, row, index) {
+                if(typeof column._formatter === 'string') column._formatter = window[column._formatter];//pang 修改.bug：启用编辑editable之后与自带的formatter不兼容
                 var result = column._formatter ? column._formatter(value, row, index) : value;
 
                 $.each(column, processDataOptions);
@@ -84,6 +85,19 @@
                 }
 
                 if (_dont_edit_formatter === false) {
+                    if(!!column._formatter.name){
+                        //pang 修改 bug
+                        //启用编辑editable之后与自带的formatter不兼容
+
+                        return ['<a href="javascript:void(0)"',
+                            ' data-name="' + column.field + '"',//data-name必须设置 否则x-editable无法监听到
+                            ' data-pk="' + row[that.options.idField] + '"',
+                            // ' data-value="' + result + '"',
+                            editableDataMarkup.join(''),
+                            '>' +result+ '</a>'
+                        ].join('');
+                    }
+
                     return ['<a href="javascript:void(0)"',
                         ' data-name="' + column.field + '"',
                         ' data-pk="' + row[that.options.idField] + '"',
