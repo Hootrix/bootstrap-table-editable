@@ -66,8 +66,8 @@
             $.each(that.options, processDataOptions);
 
             column.formatter = column.formatter || function(value, row, index) {
-                return value;
-            };
+                    return value;
+                };
             column._formatter = column._formatter ? column._formatter : column.formatter;
             column.formatter = function(value, row, index) {
                 if(typeof column._formatter === 'string') column._formatter = window[column._formatter];//pang 修改.bug：启用编辑editable之后与自带的formatter不兼容
@@ -85,7 +85,7 @@
                 }
 
                 if (_dont_edit_formatter === false) {
-                    if(!!column._formatter.name){
+                    if(!!column._formatter.name){//有自定义的formatter
                         //pang 修改 bug
                         //启用编辑editable之后与自带的formatter不兼容
 
@@ -135,36 +135,36 @@
                 //     {value:"3",text:"行政部"}
                 //     ]
             };
-            var c = window[column.editablePangCustomEditableOptionFunction](that.getData());
+            var c = !!column.editablePangCustomEditableOptionFunction?window[column.editablePangCustomEditableOptionFunction](that.getData()):false;
             var editableOption = !!c?$.extend(editableOptionDefault,c):column.editable;
             that.$body.find('a[data-name="' + column.field + '"]').editable(editableOption)//修改.editable(column.editable)
                 .off('save').on('save', function(e, params) {
-                    var data = that.getData(),
-                        index = $(this).parents('tr[data-index]').data('index'),
-                        row = data[index],
-                        oldValue = row[column.field];
+                var data = that.getData(),
+                    index = $(this).parents('tr[data-index]').data('index'),
+                    row = data[index],
+                    oldValue = row[column.field];
 
-                    $(this).data('value', params.submitValue);
-                    row[column.field] = params.submitValue;
-                    that.trigger('editable-save', column.field, row, oldValue, $(this));
-                    that.resetFooter();
-                });
+                $(this).data('value', params.submitValue);
+                row[column.field] = params.submitValue;
+                that.trigger('editable-save', column.field, row, oldValue, $(this));
+                that.resetFooter();
+            });
             that.$body.find('a[data-name="' + column.field + '"]').editable(editableOption)//修改.editable(column.editable)
                 .off('shown').on('shown', function(e, editable) {
-                    var data = that.getData(),
-                        index = $(this).parents('tr[data-index]').data('index'),
-                        row = data[index];
+                var data = that.getData(),
+                    index = $(this).parents('tr[data-index]').data('index'),
+                    row = data[index];
 
-                    that.trigger('editable-shown', column.field, row, $(this), editable);
-                });
+                that.trigger('editable-shown', column.field, row, $(this), editable);
+            });
             that.$body.find('a[data-name="' + column.field + '"]').editable(editableOption)//修改.editable(column.editable)
                 .off('hidden').on('hidden', function(e, reason) {
-                    var data = that.getData(),
-                        index = $(this).parents('tr[data-index]').data('index'),
-                        row = data[index];
+                var data = that.getData(),
+                    index = $(this).parents('tr[data-index]').data('index'),
+                    row = data[index];
 
-                    that.trigger('editable-hidden', column.field, row, $(this), reason);
-                });
+                that.trigger('editable-hidden', column.field, row, $(this), reason);
+            });
         });
         this.trigger('editable-init');
     };
